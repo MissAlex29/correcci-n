@@ -5,6 +5,7 @@ var climberImg, climber, climbersGroup;
 var ghost, ghostImg;
 var invisibleBlockGroup, invisibleBlock;
 var gameState = "play"
+var imegeOver;
 
 // poner imagenes y sonidos
 function preload(){
@@ -13,6 +14,7 @@ function preload(){
   climberImg = loadImage("climber.png");
   ghostImg = loadImage("ghost-standing.png");
   spookySound = loadSound("spooky.wav");
+  imegeOver = loadImage("over.png.png");
 }
 
 // configuracion pisipal
@@ -55,7 +57,7 @@ if (climbersGroup.isTouching(ghost)) {
 ghost.velocityY=0;
 }
 
-
+}
 if (invisibleBlockGroup.isTouching(ghost)||ghost.y>600){
   ghost.destroy();
   gameState = "end";   
@@ -64,13 +66,11 @@ if (invisibleBlockGroup.isTouching(ghost)||ghost.y>600){
 
 spawnDoors();
 drawSprites();
-}
+
 if(gameState === "end"){
-  background ("black");
-  stroke("red");
-  fill("red"); //El error estaba aquí 
-  textSize(30);
-  text("gameover",200,200);
+  tower.velocityY = 0;
+  Over = createSprite(300,300,80,80);
+  Over.addImage(imegeOver);  
 }
 }
 
